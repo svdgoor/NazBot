@@ -84,7 +84,7 @@ async def on_sus(message):
 async def on_message_edit(message_before: discord.Message, message_after: discord.Message):
     if message_after.author.bot:
         return
-    if 'sus' in message_after.content.lower() and not 'sus' in message_before:
+    if 'sus' in message_after.content.lower() or message_after.content.lower() == "https://tenor.com/view/among-us-twerk-twerking-mason-stupid-dumb-fat-gif-19411661":
         await on_sus(message_after)
         await message_after.reply("### Bypassing the filter huh? Shame on you! " + str(CLIENT.get_emoji(EMOJI_ID)))
 @CLIENT.event
