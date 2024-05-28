@@ -79,12 +79,18 @@ async def on_sus(message):
         await message.author.edit(nick=name)
     except discord.errors.Forbidden:
         pass
-    
+
+SUS_GIF_LINKS = [
+    "https://tenor.com/view/among-us-among-us-twerk-among-us-pride-among-us-gay-pride-gif-21789680",
+    "https://tenor.com/view/among-us-twerk-twerking-mason-stupid-dumb-fat-gif-19411661",
+    "https://tenor.com/view/amogus-gif-25896875"
+]
+
 @CLIENT.event
 async def on_message_edit(message_before: discord.Message, message_after: discord.Message):
     if message_after.author.bot:
         return
-    if 'sus' in message_after.content.lower() or message_after.content.lower() == "https://tenor.com/view/among-us-twerk-twerking-mason-stupid-dumb-fat-gif-19411661":
+    if 'sus' in message_after.content.lower() or message_after.content.lower() in SUS_GIF_LINKS:
         await on_sus(message_after)
         await message_after.reply("### Bypassing the filter huh? Shame on you! " + str(CLIENT.get_emoji(EMOJI_ID)))
 @CLIENT.event
