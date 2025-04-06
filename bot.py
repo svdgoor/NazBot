@@ -97,6 +97,16 @@ async def on_message_edit(message_before: discord.Message, message_after: discor
     if 'sus' in message_after.content.lower() or message_after.content.lower() in SUS_GIF_LINKS:
         await on_sus(message_after)
         await message_after.reply("### Bypassing the filter huh? Shame on you! " + str(CLIENT.get_emoji(EMOJI_ID)))
+    if 'shooting' or 'sh*ting' or 'shoot' in message_after.content.lower():
+        new_message = message_after.content\
+            .replace("shooting", "**shitting**")\
+            .replace("Shooting", "**Shitting**")\
+            .replace("shoot", "**sh*t**")\
+            .replace("Shoot", "**Sh*t**")\
+            .replace("sh*ting", "**shitting**")\
+            .replace("Sh*ting", "**Shitting**") + "*"
+        await message_after.reply("### Did you mean **shitting**?\n" + new_message)
+
 @CLIENT.event
 async def on_member_update(old_member: discord.Member, new_member: discord.Member):
     if not new_member.nick or not new_member.nick.startswith(NEW_NAME):
