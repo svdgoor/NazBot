@@ -97,7 +97,7 @@ async def on_message_edit(message_before: discord.Message, message_after: discor
     if 'sus' in message_after.content.lower() or message_after.content.lower() in SUS_GIF_LINKS:
         await on_sus(message_after)
         await message_after.reply("### Bypassing the filter huh? Shame on you! " + str(CLIENT.get_emoji(EMOJI_ID)))
-    if 'shooting' or 'sh*ting' or 'shoot' in message_after.content.lower():
+    if any(key in message_after.content.lower() for key in ['shooting' or 'sh*ting' or 'shoot']):
         new_message = message_after.content\
             .replace("shooting", "**shitting**")\
             .replace("Shooting", "**Shitting**")\
@@ -105,7 +105,7 @@ async def on_message_edit(message_before: discord.Message, message_after: discor
             .replace("Shoot", "**Sh*t**")\
             .replace("sh*ting", "**shitting**")\
             .replace("Sh*ting", "**Shitting**") + "*"
-        await message_after.reply("### Did you mean **shitting**?\n" + new_message)
+        await message_after.reply("### Editing shit? You mean **shitting**?\n" + new_message)
 
 @CLIENT.event
 async def on_member_update(old_member: discord.Member, new_member: discord.Member):
@@ -141,7 +141,7 @@ async def on_message(message: discord.Message):
     if ('this' in message.content or 'This' in message.content) and not message.author.bot:
         new_message = message.content.replace('this', '**shit**').replace('This', '**Shit**')
         await message.reply("### Did you mean shit?\n" + new_message + "*")
-    if 'shooting' or 'sh*ting' or 'shoot' in message.content.lower():
+    if any(key in message.content.lower() for key in ['shooting' or 'sh*ting' or 'shoot']):
         new_message = message.content\
             .replace("shooting", "**shitting**")\
             .replace("Shooting", "**Shitting**")\
