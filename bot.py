@@ -5,9 +5,13 @@ import time
 import os 
 import asyncio
 
-settings = json.load(open("settings.json", "r"))
+def path_to_file(file: str) -> str:
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
 
-DATABASE_FILE = "db.json"
+
+DATABASE_FILE = path_to_file("db.json")
+SETTINGS_FILE = path_to_file("settings.json")
+SETTINGS = json.load(open(SETTINGS_FILE, "r"))
 DB_MUTEX = False
 VERSION = "1.0.2"
 CLIENT = discord.Client(intents=discord.Intents(messages=True, reactions=True, guilds=True, members=True, message_content=True))
@@ -132,4 +136,4 @@ async def on_message(message: discord.Message):
 
 print("Running version " + VERSION)
 # threading.Thread(target=unnick).start()
-CLIENT.run(settings["token"])
+CLIENT.run(SETTINGS["token"])
